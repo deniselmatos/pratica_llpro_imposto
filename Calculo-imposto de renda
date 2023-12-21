@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <locale.h>
+
+int main(){
+	
+	setlocale(LC_ALL, "Portuguese");
+	
+	float calc_inss(float salariobruto);
+	float calc_dependentes(int dependentes);
+	
+	float salariobruto;
+	int dependentes;
+	
+	printf(" Cálculo de Imposto de renda\n");
+	printf(" Informe o salário bruto: ");
+	scanf("%f",&salariobruto);
+	
+	printf(" Informe a quantidade de dependentes: ");
+	scanf("%d",&dependentes);
+	
+	printf(" O valor referente ao INSS é: %f\n",calc_inss(salariobruto));
+	printf(" O valor referente aos dependentes é: %f\n",calc_dependentes(dependentes));
+	
+	float total_deducao = calc_inss(salariobruto) + calc_dependentes(dependentes);
+	printf(" O valor referente a deducão é: %f\n",total_deducao);
+	
+	return 0;
+}
+
+float calc_inss(float salariobruto){
+	float inss;
+	
+	if(salariobruto >= 0.00 && salariobruto <= 1320.00){
+		inss = salariobruto * 0.075;
+	} else if(salariobruto >= 1320.01 && salariobruto <= 2571.29){
+		inss = salariobruto * 0.09;
+	} else if(salariobruto >= 2571.30 && salariobruto <= 3856.94){
+		inss = salariobruto * 0.12;
+	} else if (salariobruto >= 3856.95 && salariobruto <= 7507.49){
+		inss = salariobruto * 0.14;
+	} else {
+		inss = 7507.50 * 0.14;
+	}
+	
+	return inss;
+}
+
+float calc_dependentes(int dependentes){
+	float total_dependentes;
+	
+	total_dependentes = dependentes * 189.50;
+	
+	return total_dependentes;
+}
